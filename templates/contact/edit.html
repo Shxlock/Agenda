@@ -1,0 +1,33 @@
+
+{% extends 'layout/base.html' %}
+
+{% block 'title' %} Editar Contacto {% endblock %}
+{% block 'styles' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+{% block 'content' %} 
+
+{% if messages %}
+    {% for message in messages %}
+        <li {% if message.tags %} class="aler-success"{% endif%}>{{ message }}</li>
+    {% endfor %}
+
+{% endif%}
+
+
+<span class="aux-btns-form"><a href="{% url 'contact' %}">Volver atras</a></span>
+<form action="{% url 'contact_edit' id=id %}" method="POST">{% csrf_token %}
+    
+    <table>
+        {{ form.as_table }}
+    <table>
+    <div class="btn-wrapper">
+        <input type="submit" value="Enviar" class="btn-send">
+    </div>
+    <div>
+    </div>
+</form>
+
+
+{% endblock %}
